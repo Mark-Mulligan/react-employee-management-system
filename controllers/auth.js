@@ -1,10 +1,14 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
   const { username, password } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
   User.create(
     username,
-    password,
+    hashedPassword,
     (err) => {
       if (err.errno === 1062) {
         res.status(409).json({ success: false, message: 'Username already exsists.' });
@@ -18,6 +22,15 @@ exports.register = (req, res) => {
   );
 };
 
-exports.login = (req, res) => {
-  console.log(req.body);
-};
+exports.login = (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.status(401).json({ success: false, message: 'Incorrect Credentials'});
+    else {
+      req.login(user, error => {
+        if (error) throw error;
+        res.json({ success: true, data: user});
+      })
+    }
+  })(req, res, next)
+}

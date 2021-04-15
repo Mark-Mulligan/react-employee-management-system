@@ -13,7 +13,16 @@ const LoginRegisterForm = () => {
   const handleLoginRegistration = async (e) => {
     e.preventDefault();
     if (loginForm) {
-      console.log(username, password, confirmPassword);
+      try {
+        const response = await axios.post("/api/auth/login", {
+          username,
+          password
+        })
+        console.log(response);
+      } catch (err) {
+        console.log(err.response);
+        alert(err.response.data.message);
+      }
     } else if (password !== confirmPassword) {
       alert("Password and Confirm Password do not match.");
       return;
