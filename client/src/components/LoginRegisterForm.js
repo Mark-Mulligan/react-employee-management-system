@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import { TextField } from "@material-ui/core";
 
 const LoginRegisterForm = () => {
@@ -8,9 +9,19 @@ const LoginRegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleLoginRegistration = (e) => {
+  const handleLoginRegistration = async (e) => {
     e.preventDefault();
-    console.log(username, password, confirmPassword);
+    if (loginForm) {
+      console.log(username, password, confirmPassword);
+    } else {
+      try {
+        const response = await axios.post('/api/auth/register', { username, password });
+        console.log(response);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    
     setUsername('');
     setPassword('');
     setConfirmPassword('');
