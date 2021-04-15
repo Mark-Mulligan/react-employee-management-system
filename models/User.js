@@ -12,6 +12,12 @@ const User = {
       cb(result);
     });
   },
+
+  findById: function (userId, cb) {
+    orm.findUserById(userId, result => {
+      cb(result);
+    })
+  }
 };
 
 module.exports = User;

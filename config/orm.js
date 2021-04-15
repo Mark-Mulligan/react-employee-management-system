@@ -15,6 +15,16 @@ const orm = {
     );
   },
 
+  findUserById: function(userId, cb) {
+    const queryString = `SELECT * FROM users WHERE id = ?;`;
+    connection.query(queryString, [userId], (err, result) => {
+      if (err) throw err;
+      else {
+        return cb(result);
+      }
+    })
+  },
+
   createUser: function (username, password, errCb, cb) {
     const queryString = `INSERT INTO users (username, password) VALUES (?, ?);`;
     connection.query(queryString, [username, password], (err, result) => {
