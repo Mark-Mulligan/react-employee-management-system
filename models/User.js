@@ -1,8 +1,8 @@
 const orm = require("../config/orm");
 
 const User = {
-  create: function (username, password, cb) {
-    orm.createUser(username, password, (result) => {
+  create: function (username, password, errCb, cb) {
+    orm.createUser(username, password, (err) => errCb(err), (result) => {
       cb(result);
     });
   },

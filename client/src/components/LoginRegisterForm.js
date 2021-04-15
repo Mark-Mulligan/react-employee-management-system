@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { TextField } from "@material-ui/core";
 
 const LoginRegisterForm = () => {
@@ -13,18 +13,25 @@ const LoginRegisterForm = () => {
     e.preventDefault();
     if (loginForm) {
       console.log(username, password, confirmPassword);
+    } else if (password !== confirmPassword) {
+      alert("Password and Confirm Password do not match.");
+      return;
     } else {
       try {
-        const response = await axios.post('/api/auth/register', { username, password });
+        const response = await axios.post("/api/auth/register", {
+          username,
+          password,
+        });
         console.log(response);
       } catch (err) {
-        console.log(err)
+        console.log(err.response);
+        alert(err.response.data.message);
       }
     }
-    
-    setUsername('');
-    setPassword('');
-    setConfirmPassword('');
+
+    setUsername("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   const handleCancel = () => {

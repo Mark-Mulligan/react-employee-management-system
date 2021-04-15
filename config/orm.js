@@ -15,10 +15,12 @@ const orm = {
     );
   },
 
-  createUser: function (username, password, cb) {
+  createUser: function (username, password, errCb, cb) {
     const queryString = `INSERT INTO users (username, password) VALUES (?, ?);`;
     connection.query(queryString, [username, password], (err, result) => {
-      if (err) throw err;
+      if (err) {
+        return errCb(err)
+      }
       else {
         return cb(result);
       }

@@ -5,7 +5,7 @@ Use employee_management_db;
 
 CREATE TABLE users (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(40),
+    username VARCHAR(40) UNIQUE,
     password VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
