@@ -8,6 +8,18 @@ const LoginRegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const handleLoginRegistration = (e) => {
+    e.preventDefault();
+    console.log(username, password, confirmPassword);
+    setUsername('');
+    setPassword('');
+    setConfirmPassword('');
+  };
+
+  const handleCancel = () => {
+    loginForm ? setLoginForm(false) : setRegisterForm(false);
+  };
+
   const renderFormInputs = () => {
     return (
       <div>
@@ -41,7 +53,7 @@ const LoginRegisterForm = () => {
 
   const renderConfirmPassword = () => {
     return (
-      <div>
+      <div className="mb-3">
         <TextField
           required
           fullWidth
@@ -57,7 +69,7 @@ const LoginRegisterForm = () => {
   };
 
   return (
-    <div class="container-fluid max-width-600 mt-4">
+    <div className="container-fluid max-width-600 mt-4">
       {!loginForm && !registerForm ? (
         <div>
           <button
@@ -75,10 +87,26 @@ const LoginRegisterForm = () => {
         </div>
       ) : null}
 
-      <div>
-        {loginForm || registerForm ? renderFormInputs() : null}
-        {registerForm && renderConfirmPassword()}
-      </div>
+      {loginForm || registerForm ? (
+        <div>
+          <form onSubmit={handleLoginRegistration}>
+            {renderFormInputs()}
+            {registerForm && renderConfirmPassword()}
+            <div>
+              <button type="submit" className="btn btn-dark mr-4">
+                {loginForm ? "Login" : "Create Account"}
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-dark"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : null}
     </div>
   );
 };
