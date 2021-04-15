@@ -1,11 +1,17 @@
 const orm = require("../config/orm");
 
 const User = {
-  findOne: function(username, cb) {
-    orm.findUserByUsername(username, result => {
-      cb(result)
-    })
-  }
-}
+  create: function (username, password, cb) {
+    orm.createUser(username, password, (result) => {
+      cb(result);
+    });
+  },
+
+  findOne: function (username, cb) {
+    orm.findUserByUsername(username, (result) => {
+      cb(result);
+    });
+  },
+};
 
 module.exports = User;
