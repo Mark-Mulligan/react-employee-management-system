@@ -6,6 +6,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
 import AllEmployeesPage from "./pages/AllEmployeesPage";
 import PrivateRoute from "./routing/PrivateRoute";
+import EmployeePage from "./pages/EmployeePage";
 import "./App.css";
 
 function App() {
@@ -60,6 +61,13 @@ function App() {
         userLoggedIn={userLoggedIn}
         setUserLoggedIn={setUserLoggedIn}
         component={AllEmployeesPage}
+      />
+      <PrivateRoute 
+        exact 
+        path="/employee/:id"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={EmployeePage}
       />
     </BrowserRouter>
   );
