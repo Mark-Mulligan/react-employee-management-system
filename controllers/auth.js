@@ -40,3 +40,8 @@ exports.getUser = (req, res) => {
   console.log(req.isAuthenticated());
   res.send(req.user);
 }
+
+exports.logout = (req, res) => {
+  req.logout();
+  res.json({ success: true, message: 'You have been logged out' });
+}

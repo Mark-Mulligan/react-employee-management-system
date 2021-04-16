@@ -3,7 +3,7 @@ import axios from "axios";
 import { TextField } from "@material-ui/core";
 import PasswordInput from "../components/inputs/PasswordInput";
 
-const LoginRegisterForm = () => {
+const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
   const [loginForm, setLoginForm] = useState(false);
   const [registerForm, setRegisterForm] = useState(false);
   const [username, setUsername] = useState("");
@@ -16,10 +16,16 @@ const LoginRegisterForm = () => {
       try {
         const response = await axios.post("/api/auth/login", {
           username,
-          password
-        })
+          password,
+        });
+        setUsername("");
+        setPassword("");
+        setConfirmPassword("");
+        setUserLoggedIn(true);
+        history.push("/dashboard");
         console.log(response);
       } catch (err) {
+        console.log(err);
         console.log(err.response);
         alert(err.response.data.message);
       }
@@ -38,10 +44,6 @@ const LoginRegisterForm = () => {
         alert(err.response.data.message);
       }
     }
-
-    setUsername("");
-    setPassword("");
-    setConfirmPassword("");
   };
 
   const handleCancel = () => {
