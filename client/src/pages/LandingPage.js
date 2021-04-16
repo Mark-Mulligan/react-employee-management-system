@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GetUserButton from '../components/buttons/GetUserButton';
 import LoginRegisterForm from '../components/LoginRegisterForm';
 
-const LandingPage = ({ history, setUserLoggedIn }) => {
+const LandingPage = ({ history, userLoggedIn, setUserLoggedIn }) => {
+
+  useEffect(() => {
+    console.log('landing page use effect ran')
+    if (userLoggedIn) {
+      history.push('/dashboard');
+    }
+  }, [userLoggedIn, history])
 
   return (
     <div className="container mt-4 text-center">
