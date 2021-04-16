@@ -28,9 +28,12 @@ const columns = [
   },
 ];
 
-const AllEmployeesPage = () => {
+const AllEmployeesPage = (props) => {
   return (
-    <div>All Employees Page</div>
+    <div>
+    {console.log(props)}
+    All Employees Page
+    </div>
   )
 }
 

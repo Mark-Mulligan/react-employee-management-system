@@ -47,7 +47,28 @@ function App() {
         <Route component={BoostrapNavbar} />
       </Switch>
 
-      {userLoggedIn === false ? (
+      <PrivateRoute 
+        exact
+        path="/dashboard"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={AnalyticsPage}
+      />
+      <PrivateRoute
+        exact
+        path="/employees"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={AllEmployeesPage}
+      />
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
+/* 
+{userLoggedIn === false ? (
         <Redirect to="/" />
       ) : (
         <Route
@@ -62,15 +83,7 @@ function App() {
           )}
         />
       )}
-      <PrivateRoute
-        exact
-        path="/employees"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={AllEmployeesPage}
-      />
-    </BrowserRouter>
-  );
-}
 
-export default App;
+
+
+*/

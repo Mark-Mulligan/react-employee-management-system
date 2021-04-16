@@ -1,6 +1,11 @@
 import { Redirect, Route } from "react-router-dom";
 
-const PrivateRoute = ({ userLoggedIn, component: Component, ...rest }) => {
+const PrivateRoute = ({
+  userLoggedIn,
+  setUserLoggedIn,
+  component: Component,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -8,7 +13,11 @@ const PrivateRoute = ({ userLoggedIn, component: Component, ...rest }) => {
         userLoggedIn === false ? (
           <Redirect to="/" />
         ) : (
-          <Component {...props} />
+          <Component
+            userLoggedIn={userLoggedIn}
+            setUserLoggedIn={setUserLoggedIn}
+            {...props}
+          />
         )
       }
     />
