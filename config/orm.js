@@ -35,6 +35,19 @@ const orm = {
         return cb(result);
       }
     })
+  },
+
+  createEmployee: function (employeeObj, errCb, cb) {
+    const { firstName, lastName, roleId, managerId, dateHired, userId } = employeeObj;
+
+    const queryString = `INSERT INTO employees (first_name, last_name, role_id, manager_id, date_hired, user_id) VALUES (?, ?, ?, ?, ?, ?)`;
+    connection.query(queryString, [firstName, lastName, roleId, managerId, dateHired, userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    })
   }
 };
 
