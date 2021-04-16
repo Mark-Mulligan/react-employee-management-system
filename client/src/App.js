@@ -4,6 +4,8 @@ import axios from "axios";
 import LandingPage from "./pages/LandingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
+import AllEmployeesPage from "./pages/AllEmployeesPage";
+import PrivateRoute from "./routing/PrivateRoute";
 import "./App.css";
 
 function App() {
@@ -60,6 +62,13 @@ function App() {
           )}
         />
       )}
+      <PrivateRoute
+        exact
+        path="/employees"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={AllEmployeesPage}
+      />
     </BrowserRouter>
   );
 }
