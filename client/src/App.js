@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
+import PrivateRoute from "./routing/PrivateRoute";
 import LandingPage from "./pages/LandingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
 import AllEmployeesPage from "./pages/AllEmployeesPage";
-import PrivateRoute from "./routing/PrivateRoute";
 import EmployeePage from "./pages/EmployeePage";
+import DepartmentsPage from "./pages/DepartmentsPage";
+import DepartmentPage from "./pages/DepartmentPage";
 import "./App.css";
 
 function App() {
@@ -68,6 +70,20 @@ function App() {
         userLoggedIn={userLoggedIn}
         setUserLoggedIn={setUserLoggedIn}
         component={EmployeePage}
+      />
+      <PrivateRoute 
+        exact 
+        path="/departments"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={DepartmentsPage}
+      />
+      <PrivateRoute 
+        exact 
+        path="/department/:id"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={DepartmentPage}
       />
     </BrowserRouter>
   );
