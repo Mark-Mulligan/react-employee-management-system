@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import PrivateRoute from "./routing/PrivateRoute";
 import LandingPage from "./pages/LandingPage";
@@ -9,6 +9,8 @@ import AllEmployeesPage from "./pages/AllEmployeesPage";
 import EmployeePage from "./pages/EmployeePage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import DepartmentPage from "./pages/DepartmentPage";
+import RolesPage from "./pages/RolesPage";
+import RolePage from "./pages/RolePage";
 import "./App.css";
 
 function App() {
@@ -85,29 +87,22 @@ function App() {
         setUserLoggedIn={setUserLoggedIn}
         component={DepartmentPage}
       />
+      <PrivateRoute 
+        exact 
+        path="/roles"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={RolesPage}
+      />
+      <PrivateRoute 
+        exact 
+        path="/role/:id"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={RolePage}
+      />
     </BrowserRouter>
   );
 }
 
 export default App;
-
-/* 
-{userLoggedIn === false ? (
-        <Redirect to="/" />
-      ) : (
-        <Route
-          exact
-          path="/dashboard"
-          render={(props) => (
-            <AnalyticsPage
-              {...props}
-              userLoggedIn={userLoggedIn}
-              setUserLoggedIn={setUserLoggedIn}
-            />
-          )}
-        />
-      )}
-
-
-
-*/
