@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import LandingPage from "./pages/LandingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import BoostrapNavbar from './components/navigation/BootstrapNavbar';
 import "./App.css";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Route path="/" component={BoostrapNavbar} />
       <Switch>
         <Route
           exact
