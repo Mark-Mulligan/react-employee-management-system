@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from "axios";
 import LandingPage from "./pages/LandingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
-import BoostrapNavbar from './components/navigation/BootstrapNavbar';
+import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
 import "./App.css";
 
 function App() {
@@ -23,13 +23,12 @@ function App() {
   };
 
   useEffect(() => {
-    console.log('use effect in app ran');
+    console.log("use effect in app ran");
     checkForLoggedInUser();
   }, []);
 
   return (
     <BrowserRouter>
-      <Route path="/" component={BoostrapNavbar} />
       <Switch>
         <Route
           exact
@@ -42,22 +41,25 @@ function App() {
             />
           )}
         />
-        {userLoggedIn === false ? (
-          <Redirect to="/" />
-        ) : (
-          <Route
-            exact
-            path="/dashboard"
-            render={(props) => (
-              <AnalyticsPage
-                {...props}
-                userLoggedIn={userLoggedIn}
-                setUserLoggedIn={setUserLoggedIn}
-              />
-            )}
-          />
-        )}
+
+        <Route component={BoostrapNavbar} />
       </Switch>
+
+      {userLoggedIn === false ? (
+        <Redirect to="/" />
+      ) : (
+        <Route
+          exact
+          path="/dashboard"
+          render={(props) => (
+            <AnalyticsPage
+              {...props}
+              userLoggedIn={userLoggedIn}
+              setUserLoggedIn={setUserLoggedIn}
+            />
+          )}
+        />
+      )}
     </BrowserRouter>
   );
 }
