@@ -37,6 +37,19 @@ const orm = {
     })
   },
 
+  createDepartment: function (departmentObj, errCb, cb) {
+    const { name, userId } = departmentObj;
+
+    const queryString = `INSERT INTO departments (name, user_id) Values (?, ?);`;
+    connection.query(queryString, [name, userId ], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        cb(result);
+      }
+    })
+  },
+
   createEmployee: function (employeeObj, errCb, cb) {
     const { firstName, lastName, roleId, managerId, dateHired, userId } = employeeObj;
 
