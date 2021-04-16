@@ -50,6 +50,19 @@ const orm = {
     })
   },
 
+  createRole: function (roleObj, errCb, cb) {
+    const { title, salary, departmentId, userId } = roleObj;
+
+    const queryString = `INSERT INTO roles (title, salary, department_id, user_id) Values (?, ?, ?, ?);`;
+    connection.query(queryString, [title, salary, departmentId, userId ], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        cb(result);
+      }
+    })
+  },
+
   createEmployee: function (employeeObj, errCb, cb) {
     const { firstName, lastName, roleId, managerId, dateHired, userId } = employeeObj;
 
