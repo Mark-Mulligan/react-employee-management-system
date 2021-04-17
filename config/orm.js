@@ -76,7 +76,7 @@ const orm = {
     })
   }, 
 
-  getDepartmentTableData: function (cb, errCb) {
+  getDepartmentTableData: function (userId, cb, errCb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
     count(distinct roles.id) as roles, 
@@ -86,10 +86,11 @@ const orm = {
     on (roles.department_id = departments.id)
     left join employees
     on (employees.role_id = roles.id)
+    Where departments.user_id = ?
     group by
         departments.id;`;
 
-    connection.query(queryString, (err, result) => {
+    connection.query(queryString, [userId], (err, result) => {
       if (err) {
         return errCb(err);
       } else {

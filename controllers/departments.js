@@ -7,8 +7,20 @@ exports.createDepartment = (req, res) => {
 
     Department.create(
       { departmentName, userId },
-      (err) => res.status(500).json({ success: false, err: err}),
-      (result) => res.status(201).json({ success: true, data: result }),
+      (err) => res.status(500).json({ success: false, err: err }),
+      (result) => res.status(201).json({ success: true, data: result })
     );
   }
+
+  exports.getDepartmentTableData = (req, res) => {
+    if (req.isAuthenticated()) {
+      const userId = req.user.id;
+
+      Department.getTableData(
+        userId,
+        (err) => res.status(500).json({ success: false, err: err }),
+        (result) => res.status(200).json({ success: true, data: result })
+      );
+    }
+  };
 };
