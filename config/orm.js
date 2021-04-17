@@ -38,10 +38,10 @@ const orm = {
   },
 
   createDepartment: function (departmentObj, errCb, cb) {
-    const { name, userId } = departmentObj;
+    const { departmentName, userId } = departmentObj;
 
     const queryString = `INSERT INTO departments (name, user_id) Values (?, ?);`;
-    connection.query(queryString, [name, userId ], (err, result) => {
+    connection.query(queryString, [departmentName, userId ], (err, result) => {
       if (err) {
         return errCb(err);
       } else {

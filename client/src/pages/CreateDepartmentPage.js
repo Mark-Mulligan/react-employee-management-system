@@ -3,22 +3,21 @@ import axios from "axios";
 import ErrorModal from "../components/modals/ErrorModal";
 import DepartmentForm from "../components/forms/DepartmentForm";
 
-const CreateDepartmentPage = () => {
+const CreateDepartmentPage = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleFormSubmit = (event, departmentName, userId) => {
+  const handleFormSubmit = (event, departmentName) => {
     event.preventDefault();
-    axios.post("/departments", { departmentName, userId }).then(
+    axios.post("/api/departments", { departmentName }).then(
       (response) => {
-        if (response.status === 200) {
-          this.props.history.push("/departments");
+        console.log(response);
+        if (response.status === 201) {
+          props.history.push("/departments");
         }
       },
       (error) => {
         console.log(error);
-        this.setState({
-          errorMessage: "There was an error updating the role.",
-        });
+        setErrorMessage("There was an error updating the role.");
       }
     );
   };
