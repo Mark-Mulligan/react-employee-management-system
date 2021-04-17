@@ -74,7 +74,29 @@ const orm = {
         return cb(result);
       }
     })
-  }
+  }, 
+
+  getDepartmentTableData: function (cb, errCb) {
+    const queryString = `SELECT departments.id, departments.name, 
+    count(employees.id) as employees, 
+    count(distinct roles.id) as roles, 
+    SUM(roles.salary) as departmentUtilization       
+    from departments
+    left join roles
+    on (roles.department_id = departments.id)
+    left join employees
+    on (employees.role_id = roles.id)
+    group by
+        departments.id;`;
+
+    connection.query(queryString, (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
 };
 
 module.exports = orm;
