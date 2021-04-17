@@ -14,9 +14,27 @@ import CreateDepartmentPage from "./pages/CreateDepartmentPage";
 import RolesPage from "./pages/RolesPage";
 import RolePage from "./pages/RolePage";
 import CreateRolePage from "./pages/CreateRolePage";
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
 import "./App.css";
 
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+  },
+});
+
+const useStyles = makeStyles({
+  root: {
+    background: 'rgb(35,35,35);',
+    color: 'rgba(220,220,215,255)',
+    fontFamily: 'Roboto, sans-serif'
+  },
+});
+
 function App() {
+  const classes = useStyles();
   const [userLoggedIn, setUserLoggedIn] = useState(null);
 
   const checkForLoggedInUser = async () => {
@@ -38,94 +56,96 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(props) => (
+              <LandingPage
+                {...props}
+                userLoggedIn={userLoggedIn}
+                setUserLoggedIn={setUserLoggedIn}
+              />
+            )}
+          />
+
+          <Route component={BoostrapNavbar} />
+        </Switch>
+
+        <PrivateRoute
           exact
-          path="/"
-          render={(props) => (
-            <LandingPage
-              {...props}
-              userLoggedIn={userLoggedIn}
-              setUserLoggedIn={setUserLoggedIn}
-            />
-          )}
+          path="/dashboard"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={AnalyticsPage}
         />
-
-        <Route component={BoostrapNavbar} />
-      </Switch>
-
-      <PrivateRoute 
-        exact
-        path="/dashboard"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={AnalyticsPage}
-      />
-      <PrivateRoute
-        exact
-        path="/employees"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={AllEmployeesPage}
-      />
-      <PrivateRoute 
-        exact
-        path="/employees/new"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={CreateEmployeePage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/employee/:id"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={EmployeePage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/departments"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={DepartmentsPage}
-      />
-      <PrivateRoute 
-        exact
-        path="/departments/new"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={CreateDepartmentPage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/department/:id"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={DepartmentPage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/roles"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={RolesPage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/roles/new"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={CreateRolePage}
-      />
-      <PrivateRoute 
-        exact 
-        path="/role/:id"
-        userLoggedIn={userLoggedIn}
-        setUserLoggedIn={setUserLoggedIn}
-        component={RolePage}
-      />
-    </BrowserRouter>
+        <PrivateRoute
+          exact
+          path="/employees"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={AllEmployeesPage}
+        />
+        <PrivateRoute
+          exact
+          path="/employees/new"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={CreateEmployeePage}
+        />
+        <PrivateRoute
+          exact
+          path="/employee/:id"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={EmployeePage}
+        />
+        <PrivateRoute
+          exact
+          path="/departments"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={DepartmentsPage}
+        />
+        <PrivateRoute
+          exact
+          path="/departments/new"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={CreateDepartmentPage}
+        />
+        <PrivateRoute
+          exact
+          path="/department/:id"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={DepartmentPage}
+        />
+        <PrivateRoute
+          exact
+          path="/roles"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={RolesPage}
+        />
+        <PrivateRoute
+          exact
+          path="/roles/new"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={CreateRolePage}
+        />
+        <PrivateRoute
+          exact
+          path="/role/:id"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={RolePage}
+        />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
