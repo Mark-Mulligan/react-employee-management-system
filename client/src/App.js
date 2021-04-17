@@ -7,10 +7,13 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
 import AllEmployeesPage from "./pages/AllEmployeesPage";
 import EmployeePage from "./pages/EmployeePage";
+import CreateEmployeePage from "./pages/CreateEmployeePage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import DepartmentPage from "./pages/DepartmentPage";
+import CreateDepartmentPage from "./pages/CreateDepartmentPage";
 import RolesPage from "./pages/RolesPage";
 import RolePage from "./pages/RolePage";
+import CreateRolePage from "./pages/CreateRolePage";
 import "./App.css";
 
 function App() {
@@ -67,6 +70,13 @@ function App() {
         component={AllEmployeesPage}
       />
       <PrivateRoute 
+        exact
+        path="/employees/new"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={CreateEmployeePage}
+      />
+      <PrivateRoute 
         exact 
         path="/employee/:id"
         userLoggedIn={userLoggedIn}
@@ -81,6 +91,13 @@ function App() {
         component={DepartmentsPage}
       />
       <PrivateRoute 
+        exact
+        path="/departments/new"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={CreateDepartmentPage}
+      />
+      <PrivateRoute 
         exact 
         path="/department/:id"
         userLoggedIn={userLoggedIn}
@@ -93,6 +110,13 @@ function App() {
         userLoggedIn={userLoggedIn}
         setUserLoggedIn={setUserLoggedIn}
         component={RolesPage}
+      />
+      <PrivateRoute 
+        exact 
+        path="/roles/new"
+        userLoggedIn={userLoggedIn}
+        setUserLoggedIn={setUserLoggedIn}
+        component={CreateRolePage}
       />
       <PrivateRoute 
         exact 
