@@ -3,16 +3,15 @@ import axios from "axios";
 import ErrorModal from "../components/modals/ErrorModal";
 import DepartmentForm from "../components/forms/DepartmentForm";
 
-const CreateDepartmentPage = (props) => {
+const CreateDepartmentPage = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleFormSubmit = (event, departmentName) => {
     event.preventDefault();
     axios.post("/api/departments", { departmentName }).then(
       (response) => {
-        console.log(response);
         if (response.status === 201) {
-          props.history.push("/departments");
+          history.push("/departments");
         }
       },
       (error) => {
