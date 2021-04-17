@@ -76,7 +76,7 @@ const orm = {
     })
   }, 
 
-  getDepartmentTableData: function (userId, cb, errCb) {
+  getDepartmentTableData: function (userId, errCb, cb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
     count(distinct roles.id) as roles, 

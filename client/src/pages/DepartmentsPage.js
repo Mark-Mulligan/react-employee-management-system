@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import ErrorModal from "../components/modals/ErrorModal";
@@ -34,63 +34,61 @@ const columns = [
   },
 ];
 
-class DepartmentsPage extends React.Component {
-  state = { departments: [], errorMessage: "" };
+const DepartmentsPage = (props) => {
+  const [departments, setDepartments] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  getDepartments = () => {
+  const getDepartments = () => {
     axios
-      .get('/departments')
+      .get('/api/departments')
       .then(({ data }) => {
-        this.setState({ departments: data });
+        console.log(data);
+        setDepartments(data);
       })
       .catch((error) => {
         if (error.response) {
           console.log(error.response);
-          this.setState({ errorMessage: error.response.statusText });
+          setErrorMessage(error.response.statusText);
         } else if (error.request) {
           console.log(error.request);
-          this.setState({
-            errorMessage:
-              "There was an error connecting to the server. Please reload the page.",
-          });
+          setErrorMessage('There was an error connecting to the server.  Please reload the page.');
         } else {
           console.log("Error", error.message);
-          this.setState({
-            errorMessage: "There was an error loading the page.",
-          });
+          setErrorMessage("There was an error loading the page.")
         }
         console.log(error.config);
       });
   };
 
-  componentDidMount() {
-    this.getDepartments();
-  }
+  useEffect(() => {
+    if (props.userLoggedIn) {
+      console.log('department page mounted');
+      getDepartments();
+    }
+  }, [props.userLoggedIn])
 
-  render() {
-    return (
-      <div className="mt-5">
-        <h2 className="text-center">Departments</h2>
-        <div className="departments-table-container">
-          {this.state.errorMessage ? (
-            <ErrorModal modalMessage={this.state.errorMessage} />
-          ) : (
-            <DataGrid
-              autoHeight={true}
-              scrollbarSize={20}
-              rowHeight={30}
-              rows={this.state.departments}
-              columns={columns}
-              disableSelectionOnClick={true}
-              onRowClick={(data) => {
-                this.props.history.push(`/department/${data.row.id}`);
-              }}
-            />
-          )}
-        </div>
+  return (
+    <div className="mt-5">
+      <h2 className="text-center">Departments</h2>
+      <div className="departments-table-container">
+        {errorMessage ? (
+          <ErrorModal modalMessage={errorMessage} />
+        ) : (
+          <DataGrid
+            autoHeight={true}
+            scrollbarSize={20}
+            rowHeight={30}
+            rows={departments}
+            columns={columns}
+            disableSelectionOnClick={true}
+            onRowClick={(data) => {
+              props.history.push(`/department/${data.row.id}`);
+            }}
+          />
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default DepartmentsPage;
