@@ -10,7 +10,7 @@ const EditDepartmentPage = (props) => {
   const handleFormSubmit = (event, departmentName) => {
     event.preventDefault();
     axios
-      .put(`/department/${departmentId}`, {
+      .put(`/api/departments/${departmentId}`, {
         departmentName: departmentName,
       })
       .then(
