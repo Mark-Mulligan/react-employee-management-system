@@ -3,6 +3,7 @@ const connection = require("./connection.js");
 const orm = {
   deleteOne: function (deleteObj, errCb, cb) {
     const { table, targetId, userId } = deleteObj;
+    console.log(table, targetId, userId)
     const queryString = `DELETE FROM ${table} where id = ? and user_id = ?;`;
 
     connection.query(queryString, [targetId, userId], (err, result) => {
@@ -136,6 +137,18 @@ const orm = {
       }
     });
   },
+
+  updateDepartment: function(departmentObj, errCb, cb) {
+    const { departmentName, departmentId, userId } = departmentObj;
+    const queryString = `UPDATE departments SET name = ? WHERE id = ? AND user_id = ?;`;
+    connection.query(queryString, [departmentName, departmentId, userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    })
+  }
 };
 
 module.exports = orm;
