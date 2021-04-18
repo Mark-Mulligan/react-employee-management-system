@@ -121,6 +121,18 @@ const orm = {
     });
   },
 
+  updateRole: function(RoleObj, errCb, cb) {
+    const { title, salary, roleId, userId } = RoleObj;
+    const queryString = `UPDATE roles SET title = ?, salary = ? WHERE id = ? AND user_id = ?;`;
+    connection.query(queryString, [title, salary, roleId, userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    })
+  },
+
   getDepartmentTableData: function (userId, errCb, cb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
