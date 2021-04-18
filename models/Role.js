@@ -1,6 +1,16 @@
 const orm = require("../config/orm");
 
 const Role = {
+  create: function (roleObj, errCb, cb) {
+    orm.createRole(
+      roleObj,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getRoleTableData(
       userId,
