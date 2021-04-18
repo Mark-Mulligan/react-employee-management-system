@@ -39,7 +39,7 @@ const DepartmentPage = (props) => {
   };
 
   const handleDeleteClick = () => {
-    axios.delete(`/department/${departmentId}`).then(
+    axios.delete(`/api/departments/${departmentId}`).then(
       (response) => {
         if (response.status === 200) {
           props.history.push("/departments");

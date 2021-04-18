@@ -1,6 +1,20 @@
 const connection = require("./connection.js");
 
 const orm = {
+  deleteOne: function (deleteObj, errCb, cb) {
+    const { table, targetId, userId } = deleteObj;
+    const queryString = `DELETE FROM ${table} where id = ? and user_id = ?;`;
+
+    connection.query(queryString, [targetId, userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
+
+
   findUserByUsername: function (username, cb) {
     const queryString = `SELECT * FROM users WHERE username = ?;`;
     connection.query(
