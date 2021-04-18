@@ -19,6 +19,14 @@ const Department = {
     );
   },
 
+  update: function (departmentObj, errCb, cb) {
+    orm.updateDepartment(
+      departmentObj,
+      (err) => errCb(err),
+      (result) => cb(result)
+    );
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getDepartmentTableData(
       userId,
