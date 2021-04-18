@@ -18,6 +18,15 @@ const Department = {
       (result) => cb(result)
     );
   },
+
+  getSingleDepartment: function (userId, departmentId, errCb, cb) {
+    orm.getSingleDepartment(
+      userId,
+      departmentId,
+      (err) => errCb(err),
+      (result) => cb(result)
+    );
+  },
 };
 
 module.exports = Department;
