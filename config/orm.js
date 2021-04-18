@@ -104,6 +104,23 @@ const orm = {
     });
   },
 
+  getSingleRole: function (userId, roleId, errCb, cb) {
+    const queryString = `SELECT roles.id, roles.title, roles.salary, 
+    departments.name, departments.id as department_id, count(employees.id) as employees, sum(roles.salary) as roleUtilization
+    from roles left join employees on (roles.id = employees.role_id)
+    left join departments on (roles.department_id = departments.id)
+    WHERE roles.user_id = ?
+    group by roles.id having roles.id = ?;`;
+
+    connection.query(queryString, [userId, roleId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
+
   getDepartmentTableData: function (userId, errCb, cb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
