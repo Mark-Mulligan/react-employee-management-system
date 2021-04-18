@@ -13,8 +13,8 @@ const headerAndKeys = [
 ];
 
 const DepartmentPage = (props) => {
+  const departmentId = props.match.params.id;
   const [department, setDepartment] = useState(null);
-  const [departmentId, setDepartmentId] = useState(props.match.params.id);
   const [errorMessage, setErrorMessage] = useState("");
 
   const getDepartmentInfo = () => {
