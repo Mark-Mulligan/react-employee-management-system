@@ -21,6 +21,16 @@ const Role = {
     );
   },
 
+  update: function (roleObj, errCb, cb) {
+    orm.updateRole(
+      roleObj,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getRoleTableData(
       userId,
