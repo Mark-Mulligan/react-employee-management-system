@@ -91,11 +91,11 @@ const orm = {
     })
   }, 
 
-  getRoleTableData: function (errCb, cb) {
+  getRoleTableData: function (userId, errCb, cb) {
     const queryString = `Select roles.id, title, salary, departments.name as department from roles 
-        join departments where roles.department_id = departments.id;`;
+        join departments where roles.department_id = departments.id AND roles.user_id = ?`;
 
-    connection.query(queryString, (err, result) => {
+    connection.query(queryString, [userId], (err, result) => {
       if (err) {
         return errCb(err);
       } else {
