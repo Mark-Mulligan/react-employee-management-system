@@ -6,8 +6,9 @@ const {
   createDepartment, getDepartmentTableData, getSingleDepartmentInfo
 } = require("../controllers/departments");
 
+router.route("/:departmentId").get(getSingleDepartmentInfo);
 router.route("/").post(createDepartment);
 router.route("/").get(getDepartmentTableData);
-router.route("/:id").get(getSingleDepartmentInfo);
+
 
 module.exports = router;

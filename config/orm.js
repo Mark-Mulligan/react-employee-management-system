@@ -99,7 +99,7 @@ const orm = {
     });
   },
 
-  getSingleDepartment: function (userId, departmentId, cb, errCb) {
+  getSingleDepartment: function (userId, departmentId, errCb, cb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
     count(distinct roles.id) as roles, 

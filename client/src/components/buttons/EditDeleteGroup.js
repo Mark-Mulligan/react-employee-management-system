@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import DeleteModal from './DeleteModal';
+import DeleteModal from '../modals/DeleteModal';
 
 const EditDeleteGroup = (props) => {
   return (

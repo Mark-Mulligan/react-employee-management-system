@@ -16,7 +16,6 @@ import RolePage from "./pages/RolePage";
 import CreateRolePage from "./pages/CreateRolePage";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles';
 import "./App.css";
 
 
@@ -26,16 +25,7 @@ const theme = createMuiTheme({
   },
 });
 
-const useStyles = makeStyles({
-  root: {
-    background: 'rgb(35,35,35);',
-    color: 'rgba(220,220,215,255)',
-    fontFamily: 'Roboto, sans-serif'
-  },
-});
-
 function App() {
-  const classes = useStyles();
   const [userLoggedIn, setUserLoggedIn] = useState(null);
 
   const checkForLoggedInUser = async () => {
@@ -52,7 +42,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("use effect in app ran");
     checkForLoggedInUser();
   }, []);
 

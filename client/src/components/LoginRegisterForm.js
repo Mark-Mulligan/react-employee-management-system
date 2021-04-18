@@ -23,7 +23,6 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
         setConfirmPassword("");
         setUserLoggedIn(true);
         history.push("/dashboard");
-        console.log(response);
       } catch (err) {
         console.log(err);
         console.log(err.response);

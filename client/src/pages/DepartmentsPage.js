@@ -62,7 +62,6 @@ const DepartmentsPage = (props) => {
 
   useEffect(() => {
     if (props.userLoggedIn) {
-      console.log('department page mounted');
       getDepartments();
     }
   }, [props.userLoggedIn])
