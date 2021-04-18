@@ -1,46 +1,40 @@
-import React from "react";
-import api from "../apis/api";
-import ErrorModal from "../components/ErrorModal";
-import RoleForm from "../components/RoleForm";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ErrorModal from "../components/modals/ErrorModal";
+import RoleForm from "../components/forms/RoleForm";
 
-class CreateRolePage extends React.Component {
-  state = { errorMessage: "" };
+const CreateRolePage = (props) => {
+  const [errorMessage, setErrorMessage] = useState("");
 
-  handleFormSubmit = (e, title, salary, departmentId) => {
+  const handleFormSubmit = (e, title, salary, departmentId) => {
     e.preventDefault();
-    api
-      .post("/roles", {
-        title: title,
-        salary: salary,
-        departmentId: departmentId,
+    axios
+      .post("/api/roles", {
+        title, salary, departmentId
       })
       .then(
         (response) => {
           if (response.status === 200) {
-            this.props.history.push("/roles");
+            props.history.push("/roles");
           }
         },
         (error) => {
           console.log(error);
-          this.setState({
-            errorMessage: "There was an error updating the role.",
-          });
+          setErrorMessage("There was an error updating the role.");
         }
       );
   };
 
-  render() {
-    return (
-      <div className="container mt-5">
-        <h2 className="text-center mb-4">Create Role</h2>
-        {this.state.errorMessage ? (
-          <ErrorModal modalMessage={this.state.errorMessage} />
-        ) : (
-          <RoleForm handleFormSubmit={this.handleFormSubmit} />
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Create Role</h2>
+      {errorMessage ? (
+        <ErrorModal modalMessage={errorMessage} />
+      ) : (
+        <RoleForm handleFormSubmit={handleFormSubmit} />
+      )}
+    </div>
+  );
 }
 
 export default CreateRolePage;
