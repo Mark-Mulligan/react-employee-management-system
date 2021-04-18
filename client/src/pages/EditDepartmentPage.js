@@ -1,48 +1,45 @@
-import React from "react";
-import api from "../apis/api";
-import DepartmentForm from "../components/DepartmentForm";
-import ErrorModal from "../components/ErrorModal";
+import React, { useState } from "react";
+import axios from "axios";
+import DepartmentForm from "../components/forms/DepartmentForm";
+import ErrorModal from "../components/modals/ErrorModal";
 
-class EditDepartmentPage extends React.Component {
-  state = { departmentId: this.props.match.params.id, errorMessage: "" };
+const EditDepartmentPage = (props) => {
+  const departmentId = props.match.params.id;
+  const [errorMessage, setErrorMessage] = useState('');
 
-  handleFormSubmit = (event, departmentName) => {
+  const handleFormSubmit = (event, departmentName) => {
     event.preventDefault();
-    api
-      .put(`/department/${this.state.departmentId}`, {
+    axios
+      .put(`/department/${departmentId}`, {
         departmentName: departmentName,
       })
       .then(
         (response) => {
           if (response.status === 200) {
-            this.props.history.push("/departments");
+            props.history.push("/departments");
           }
         },
         (error) => {
           console.log(error);
-          this.setState({
-            errorMessage: "There was an error updating the department.",
-          });
+          setErrorMessage("There was an error updating the department.")
         }
       );
   };
 
-  render() {
-    return (
-      <div className="container mt-5">
-        <h2 className="text-center mb-4">Edit Department</h2>
-        {this.state.errorMessage ? (
-          <ErrorModal modalMessage={this.state.errorMessage} />
-        ) : (
-          <DepartmentForm
-            handleFormSubmit={this.handleFormSubmit}
-            departmentId={this.state.departmentId}
-            history={this.props.history}
-          />
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Edit Department</h2>
+      {errorMessage ? (
+        <ErrorModal modalMessage={errorMessage} />
+      ) : (
+        <DepartmentForm
+          handleFormSubmit={handleFormSubmit}
+          departmentId={departmentId}
+          history={props.history}
+        />
+      )}
+    </div>
+  )
 }
 
 export default EditDepartmentPage;
