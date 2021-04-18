@@ -11,6 +11,7 @@ import CreateEmployeePage from "./pages/CreateEmployeePage";
 import DepartmentsPage from "./pages/DepartmentsPage";
 import DepartmentPage from "./pages/DepartmentPage";
 import CreateDepartmentPage from "./pages/CreateDepartmentPage";
+import EditDepartmentPage from "./pages/EditDepartmentPage";
 import RolesPage from "./pages/RolesPage";
 import RolePage from "./pages/RolePage";
 import CreateRolePage from "./pages/CreateRolePage";
@@ -113,6 +114,14 @@ function App() {
           setUserLoggedIn={setUserLoggedIn}
           component={DepartmentPage}
         />
+        <PrivateRoute
+          exact
+          path="/department/:id/edit"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={EditDepartmentPage}
+        />
+
         <PrivateRoute
           exact
           path="/roles"

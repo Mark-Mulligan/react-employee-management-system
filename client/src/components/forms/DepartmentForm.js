@@ -17,10 +17,11 @@ const DepartmentForm = (props) => {
   }, [props.departmentId])
 
   const getDepartmentInfo = (id) => {
-    axios.get(`/department/${id}`).then(
+    axios.get(`/api/departments/${id}`).then(
       (response) => {
         if (response.status === 200) {
-          const departmentData = response.data[0];
+          console.log(response.data);
+          const departmentData = response.data.data[0];
           setDepartmentName(departmentData.name);
         }
       },
@@ -32,7 +33,7 @@ const DepartmentForm = (props) => {
   };
 
   const handleDeleteClick = () => {
-    axios.delete(`/department/${props.departmentId}`).then(
+    axios.delete(`/api/departments/${props.departmentId}`).then(
       (response) => {
         if (response.status === 200) {
           props.history.push("/departments");

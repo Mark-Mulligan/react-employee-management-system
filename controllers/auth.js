@@ -36,8 +36,6 @@ exports.login = (req, res, next) => {
 }
 
 exports.getUser = (req, res) => {
-  console.log('user route hit');
-  console.log(req.isAuthenticated());
   res.send(req.user);
 }
 

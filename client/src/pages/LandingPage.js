@@ -5,7 +5,6 @@ import LoginRegisterForm from '../components/LoginRegisterForm';
 const LandingPage = ({ history, userLoggedIn, setUserLoggedIn }) => {
 
   useEffect(() => {
-    console.log('landing page use effect ran')
     if (userLoggedIn) {
       history.push('/dashboard');
     }
