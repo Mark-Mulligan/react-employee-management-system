@@ -91,6 +91,19 @@ const orm = {
     })
   }, 
 
+  getRoleTableData: function (errCb, cb) {
+    const queryString = `Select roles.id, title, salary, departments.name as department from roles 
+        join departments where roles.department_id = departments.id;`;
+
+    connection.query(queryString, (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
+
   getDepartmentTableData: function (userId, errCb, cb) {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
