@@ -11,6 +11,16 @@ const Role = {
     );
   },
 
+  delete: function (deleteObj, errCb, cb) {
+    orm.deleteOne(
+      deleteObj,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getRoleTableData(
       userId,

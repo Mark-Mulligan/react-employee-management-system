@@ -14,8 +14,6 @@ exports.createDepartment = (req, res) => {
 };
 
 exports.deleteDepartment = (req, res) => {
-  console.log("delete route hit");
-
   if (req.isAuthenticated()) {
     const { departmentId } = req.params;
     const userId = req.user.id;

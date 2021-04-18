@@ -13,6 +13,19 @@ exports.createRole = (req, res) => {
   }
 }
 
+exports.deleteRole = (req, res) => {
+  if (req.isAuthenticated()) {
+    const { roleId } = req.params;
+    const userId = req.user.id;
+  
+    Role.delete(
+      { table: "roles", targetId: roleId, userId },
+      (err) => res.status(500).json({ success: false, err: err }),
+      (result) => res.status(200).json({ success: true, data: result })
+    );
+  }
+}
+
 exports.getRoleTableData = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
