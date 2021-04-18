@@ -21,7 +21,7 @@ class DepartmentPage extends React.Component {
 
   getDepartment = () => {
     axios
-      .get(`/department/${this.state.departmentId}`)
+      .get(`/api/department/${this.state.departmentId}`)
       .then(({ data }) => {
         this.setState({ department: data[0] });
       })
@@ -46,7 +46,7 @@ class DepartmentPage extends React.Component {
   };
 
   handleDeleteClick = () => {
-    axios.delete(`/department/${this.state.departmentId}`).then(
+    axios.delete(`api/department/${this.state.departmentId}`).then(
       (response) => {
         if (response.status === 200) {
           this.props.history.push("/departments");
