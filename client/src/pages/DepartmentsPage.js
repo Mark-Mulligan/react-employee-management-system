@@ -43,7 +43,7 @@ const DepartmentsPage = (props) => {
       .get('/api/departments')
       .then(({ data }) => {
         console.log(data);
-        setDepartments(data);
+        setDepartments(data.data);
       })
       .catch((error) => {
         if (error.response) {
