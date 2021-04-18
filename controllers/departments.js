@@ -14,14 +14,16 @@ exports.createDepartment = (req, res) => {
 };
 
 exports.deleteDepartment = (req, res) => {
+  console.log('delete route hit');
+
   if (req.isAuthenticated()) {
     const { departmentId } = req.params;
     const userId = req.user.id;
 
     Department.delete(
-      { table: "departments", userId, departmentId },
+      { table: "departments", targetId: departmentId,  userId, },
       (err) => res.status(500).json({ success: false, err: err }),
-      (result) => res.status(201).json({ success: true, data: result })
+      (result) => res.status(200).json({ success: true, data: result })
     );
   }
 };

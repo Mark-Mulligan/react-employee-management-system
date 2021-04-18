@@ -39,6 +39,7 @@ const DepartmentPage = (props) => {
   };
 
   const handleDeleteClick = () => {
+    console.log('delete click ran');
     axios.delete(`/api/departments/${departmentId}`).then(
       (response) => {
         if (response.status === 200) {
