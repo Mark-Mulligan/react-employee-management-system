@@ -65,9 +65,6 @@ exports.getDepartmentTableData = (req, res) => {
 };
 
 exports.getSingleDepartmentInfo = (req, res) => {
-  console.log('get single department route hit');
-  console.log(req.isAuthenticated());
-
   if (req.isAuthenticated()) {
     const userId = req.user.id;
     const { departmentId } = req.params;

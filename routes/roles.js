@@ -3,9 +3,11 @@ const router = express.Router();
 
 // Controllers
 const {
-  getRoleTableData
+  getRoleTableData, getSingleRoleInfo
 } = require("../controllers/roles");
 
+router.route("/:roleId").get(getSingleRoleInfo);
 router.route("/").get(getRoleTableData);
+
 
 module.exports = router;

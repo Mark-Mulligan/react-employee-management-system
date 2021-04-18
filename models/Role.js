@@ -10,6 +10,17 @@ const Role = {
       }
     );
   },
+
+  getSingleRole: function (userId, roleId, errCb, cb) {
+    orm.getSingleRole(
+      userId,
+      roleId,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
 };
 
 module.exports = Role;
