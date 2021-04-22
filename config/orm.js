@@ -238,6 +238,23 @@ const orm = {
       }
     );
   },
+
+  getSingleEmployee: (id, errCb, cb) => {
+    const queryString = `Select a.id, a.first_name, a.last_name, roles.title, roles.id as role_id, departments.id as department_id, 
+        departments.name as department, roles.salary, a.manager_id, CONCAT(b.first_name, ' ', b.last_name) as manager
+        FROM employees a join roles on a.role_id = roles.id 
+        join departments on roles.department_id = departments.id
+        left join employees b on b.id = a.manager_id or a.manager_id = null
+        WHERE a.id = ${id}`;
+
+    connection.query(queryString, (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
 };
 
 module.exports = orm;
