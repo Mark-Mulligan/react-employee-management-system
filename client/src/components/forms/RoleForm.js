@@ -32,7 +32,7 @@ const RoleForm = (props) => {
   };
 
   const getRoleInfo = (id) => {
-    axios.get(`/api/role/${id}`).then(
+    axios.get(`/api/roles/${id}`).then(
       (response) => {
         if (response.status === 200) {
           console.log(response);
@@ -49,7 +49,7 @@ const RoleForm = (props) => {
   };
 
   const handleDeleteClick = () => {
-    axios.delete(`/api/role/${props.roleId}`).then(
+    axios.delete(`/api/roles/${props.roleId}`).then(
       (response) => {
         if (response.status === 200) {
           props.history.push("/roles");

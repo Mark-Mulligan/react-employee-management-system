@@ -15,6 +15,7 @@ import EditDepartmentPage from "./pages/EditDepartmentPage";
 import RolesPage from "./pages/RolesPage";
 import RolePage from "./pages/RolePage";
 import CreateRolePage from "./pages/CreateRolePage";
+import EditRolePage from "./pages/EditRolePage";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
 import "./App.css";
@@ -142,6 +143,13 @@ function App() {
           userLoggedIn={userLoggedIn}
           setUserLoggedIn={setUserLoggedIn}
           component={RolePage}
+        />
+        <PrivateRoute
+          exact
+          path="/role/:id/edit"
+          userLoggedIn={userLoggedIn}
+          setUserLoggedIn={setUserLoggedIn}
+          component={EditRolePage}
         />
       </BrowserRouter>
     </ThemeProvider>
