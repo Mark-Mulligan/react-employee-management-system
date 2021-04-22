@@ -26,15 +26,16 @@ const RoleForm = (props) => {
 
   const getDepartmentValues = async () => {
     const { data } = await axios.get(
-      "/api/departments/name-id"
+      "/api/departments"
     );
     setDepartmentValues(data.data);
   };
 
   const getRoleInfo = (id) => {
-    axios.get(`/role/${id}`).then(
+    axios.get(`/api/role/${id}`).then(
       (response) => {
         if (response.status === 200) {
+          console.log(response);
           const roleData = response.data.data[0];
           setTitle(roleData.title);
           setSalary(roleData.salary);
@@ -75,11 +76,11 @@ const RoleForm = (props) => {
   return (
     <form
       onSubmit={(event) =>
-        this.props.handleFormSubmit(
+        props.handleFormSubmit(
           event,
-          this.state.title,
-          this.state.salary,
-          this.state.departmentId
+          title,
+          salary,
+          departmentId
         )
       }
     >
@@ -121,7 +122,7 @@ const RoleForm = (props) => {
               onChange={(e) => setDepartmentId(e.target.value)}
               label="Department"
             >
-              {this.renderMenuItems(
+              {renderMenuItems(
                 departmentValues,
                 "id",
                 "name"
