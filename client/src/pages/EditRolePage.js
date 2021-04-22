@@ -16,7 +16,7 @@ const EditRolePage = (props) => {
       .then(
         (response) => {
           if (response.status === 200) {
-            this.props.history.push("/roles");
+            props.history.push("/roles");
           }
         },
         (error) => {
@@ -33,6 +33,7 @@ const EditRolePage = (props) => {
           <ErrorModal modalMessage={errorMessage} />
         ) : (
           <RoleForm
+            history={props.history}
             handleFormSubmit={handleFormSubmit}
             roleId={roleId}
           />

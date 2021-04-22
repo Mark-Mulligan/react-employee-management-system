@@ -26,6 +26,34 @@ exports.deleteRole = (req, res) => {
   }
 }
 
+exports.deleteDepartment = (req, res) => {
+  if (req.isAuthenticated()) {
+    const { departmentId } = req.params;
+    const userId = req.user.id;
+
+    Department.delete(
+      { table: "departments", targetId: departmentId, userId },
+      (err) => res.status(500).json({ success: false, err: err }),
+      (result) => res.status(200).json({ success: true, data: result })
+    );
+  }
+};
+
+exports.updateRole = (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+    const { roleId } = req.params;
+    const { title, salary, departmentId } = req.body;
+
+    Role.update({ title, salary, departmentId, roleId, userId }, (err) => {
+      console.log(err);
+      res.status(500).json({ success: false, err: err });
+    }, (result) => {
+      res.status(200).json({ success: true, data: result });
+    })
+  }
+};
+
 exports.getRoleTableData = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;

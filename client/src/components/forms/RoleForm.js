@@ -35,7 +35,6 @@ const RoleForm = (props) => {
     axios.get(`/api/roles/${id}`).then(
       (response) => {
         if (response.status === 200) {
-          console.log(response);
           const roleData = response.data.data[0];
           setTitle(roleData.title);
           setSalary(roleData.salary);

@@ -122,9 +122,9 @@ const orm = {
   },
 
   updateRole: function(RoleObj, errCb, cb) {
-    const { title, salary, roleId, userId } = RoleObj;
-    const queryString = `UPDATE roles SET title = ?, salary = ? WHERE id = ? AND user_id = ?;`;
-    connection.query(queryString, [title, salary, roleId, userId], (err, result) => {
+    const { title, salary, departmentId, roleId, userId } = RoleObj;
+    const queryString = `UPDATE roles SET title = ?, salary = ?, department_id = ? WHERE id = ? AND user_id = ?;`;
+    connection.query(queryString, [title, salary, departmentId, roleId, userId], (err, result) => {
       if (err) {
         return errCb(err);
       } else {
