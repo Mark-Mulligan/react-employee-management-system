@@ -42,10 +42,9 @@ const Employee = {
   },
 
   /* Need to fix this in orm */
-  getSingleRole: function (userId, roleId, errCb, cb) {
-    orm.getSingleRole(
-      userId,
-      roleId,
+  getSingleEmployee: function (employeeId, errCb, cb) {
+    orm.getSingleEmployee(
+      employeeId,
       (err) => errCb(err),
       (result) => {
         cb(result);
