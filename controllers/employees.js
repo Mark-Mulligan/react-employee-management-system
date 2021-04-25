@@ -39,7 +39,7 @@ exports.deleteDepartment = (req, res) => {
   }
 };
 
-exports.updateRole = (req, res) => {
+exports.updateEmployee = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
     const { roleId } = req.params;
