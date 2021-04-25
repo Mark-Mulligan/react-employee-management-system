@@ -2,15 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 // Controllers
-const {
+const { getSingleEmployeeInfo, deleteEmployee, updateEmployee, getEmployeeTableData, createEmployee} = require("../controllers/employees");
 
-} = require("../constrollers/employees");
-
-router.route("/:employeeId").get(getSingleRoleInfo);
-router.route("/:employeeId").delete(deleteRole);
-router.route("/:employeeId").put(updateRole);
-router.route("/").get(getRoleTableData);
-router.route("/").post(createRole);
+router.route("/:employeeId").get(getSingleEmployeeInfo);
+router.route("/:employeeId").delete(deleteEmployee);
+router.route("/:employeeId").put(updateEmployee);
+router.route("/").get(getEmployeeTableData);
+router.route("/").post(createEmployee);
 
 
 module.exports = router;
