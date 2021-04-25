@@ -13,7 +13,7 @@ exports.createEmployee = (req, res) => {
   }
 };
 
-exports.deleteRole = (req, res) => {
+exports.deleteEmployee = (req, res) => {
   if (req.isAuthenticated()) {
     const { roleId } = req.params;
     const userId = req.user.id;
