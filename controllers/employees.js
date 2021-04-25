@@ -42,11 +42,11 @@ exports.updateEmployee = (req, res) => {
   }
 };
 
-exports.getRoleTableData = (req, res) => {
+exports.getEmployeeTableData = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
 
-    Role.getTableData(
+    Employee.getTableData(
       userId,
       (err) => {
         console.log(err);
@@ -59,22 +59,17 @@ exports.getRoleTableData = (req, res) => {
   }
 };
 
-exports.getSingleRoleInfo = (req, res) => {
+exports.getSingleEmployeeInfo = (req, res) => {
   if (req.isAuthenticated()) {
-    const userId = req.user.id;
-    const { roleId } = req.params;
+    const { employeeId } = req.params;
 
-    Role.getSingleRole(
-      userId,
-      roleId,
-      (err) => {
-        console.log(err);
-        res.status(500).json({ success: false, err: err });
-      },
-      (result) => {
-        console.log(result);
-        res.status(200).json({ success: true, data: result });
-      }
-    );
+    Employee.getSingleEmployee(employeeId, (err) => {
+      console.log(err);
+      res.status(500).json({ success: false, err: err });
+    },
+    (result) => {
+      console.log(result);
+      res.status(200).json({ success: true, data: result });
+    })
   }
 };
