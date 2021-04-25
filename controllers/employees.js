@@ -15,11 +15,11 @@ exports.createEmployee = (req, res) => {
 
 exports.deleteEmployee = (req, res) => {
   if (req.isAuthenticated()) {
-    const { roleId } = req.params;
+    const { employeeId } = req.params;
     const userId = req.user.id;
 
-    Role.delete(
-      { table: "roles", targetId: roleId, userId },
+    Employee.delete(
+      { table: "employees", targetId: employeeId, userId },
       (err) => res.status(500).json({ success: false, err: err }),
       (result) => res.status(200).json({ success: true, data: result })
     );
