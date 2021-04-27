@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import DeleteModal from "../modals/DeleteModal";
+import DateInput from "../inputs/DateInput";
 
 const EmployeeForm = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -17,7 +18,7 @@ const EmployeeForm = (props) => {
   const [departmentId, setDepartmentId] = useState("");
   const [roleId, setRoleId] = useState("");
   const [managerId, setManagerId] = useState("");
-  const [dateHired, setDateHired] = useState("");
+  const [dateHired, setDateHired] = useState(new Date());
   const [departmentValues, setDepartmentValues] = useState([]);
   const [roleValues, setRoleValues] = useState([]);
   const [managerValues, setManagerValues] = useState([]);
@@ -33,7 +34,7 @@ const EmployeeForm = (props) => {
           setRoleId(employeeData.role_id);
           setManagerId(employeeData.manager_id);
           setDateHired(employeeData.date_hired);
-          
+
           getManagerValues();
           getRolesValues(employeeData.department_id);
         }
@@ -46,32 +47,25 @@ const EmployeeForm = (props) => {
 
   const convertManagerId = (managerId) => {
     return !managerId ? "0" : managerId;
-  }
+  };
 
   const getDepartmentValues = async () => {
     try {
-      const { data } = await axios.get(
-        "/api/departments"
-      );
-      setDepartmentValues( data.data );
-    } catch(error) {
+      const { data } = await axios.get("/api/departments");
+      setDepartmentValues(data.data);
+    } catch (error) {
       console.log(error);
     }
-    
   };
 
   //Need to fix route
   const getRolesValues = async (departmentId) => {
-    const { data } = await axios.get(
-      `/api/roles?departmentid=${departmentId}`
-    );
+    const { data } = await axios.get(`/api/roles?departmentid=${departmentId}`);
     setRoleValues(data.data);
   };
 
   const getManagerValues = async () => {
-    const { data } = await axios.get(
-      `/api/employees?managers=true`
-    );
+    const { data } = await axios.get(`/api/employees?managers=true`);
     setManagerValues(data.data);
   };
 
@@ -83,18 +77,16 @@ const EmployeeForm = (props) => {
   };
 
   const handleDeleteClick = () => {
-    axios
-      .delete(`/api/employee/${props.employeeId}`)
-      .then(
-        (response) => {
-          if (response.status === 200) {
-            props.history.push("/employees");
-          }
-        },
-        (error) => {
-          console.log(error);
+    axios.delete(`/api/employee/${props.employeeId}`).then(
+      (response) => {
+        if (response.status === 200) {
+          props.history.push("/employees");
         }
-      );
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   useEffect(() => {
@@ -111,7 +103,7 @@ const EmployeeForm = (props) => {
 
   const renderRolePlacholder = () => {
     return departmentId ? "Choose" : "Must select department";
-  }
+  };
 
   const renderMenuItems = (dataArr, key1, key2) => {
     if (dataArr.length > 0) {
@@ -123,18 +115,12 @@ const EmployeeForm = (props) => {
         );
       });
     }
-  }
+  };
 
   return (
     <Form
       onSubmit={(event) =>
-        props.handleFormSubmit(
-          event,
-          firstName,
-          lastName,
-          roleId,
-          managerId
-        )
+        props.handleFormSubmit(event, firstName, lastName, roleId, managerId)
       }
     >
       <Row>
@@ -146,7 +132,7 @@ const EmployeeForm = (props) => {
               variant="outlined"
               value={firstName}
               required={true}
-              onChange={(e) =>  setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
             />
           </FormControl>
         </Col>
@@ -159,6 +145,15 @@ const EmployeeForm = (props) => {
               value={lastName}
               required={true}
               onChange={(e) => setLastName(e.target.value)}
+            />
+          </FormControl>
+        </Col>
+        <Col className="mb-4" sm={12}>
+          <FormControl fullWidth>
+            <DateInput
+              id="date-input"
+              onDateChange={setDateHired}
+              value={dateHired}
             />
           </FormControl>
         </Col>
@@ -179,11 +174,7 @@ const EmployeeForm = (props) => {
                 onChange={handleDepartmentSelect}
                 label="Department"
               >
-                {renderMenuItems(
-                  departmentValues,
-                  "id",
-                  "name"
-                )}
+                {renderMenuItems(departmentValues, "id", "name")}
               </Select>
             </FormControl>
           )}
@@ -219,11 +210,7 @@ const EmployeeForm = (props) => {
                 label="Manager"
               >
                 <MenuItem value={0}>No Manager</MenuItem>
-                {renderMenuItems(
-                  managerValues,
-                  "id",
-                  "manager"
-                )}
+                {renderMenuItems(managerValues, "id", "manager")}
               </Select>
             </FormControl>
           )}
@@ -240,12 +227,17 @@ const EmployeeForm = (props) => {
             handleDeleteClick={handleDeleteClick}
           />
         ) : null}
-        <Button className="mb-3" as={Link} to={"/employees"} variant="outline-light">
+        <Button
+          className="mb-3"
+          as={Link}
+          to={"/employees"}
+          variant="outline-light"
+        >
           Cancel
         </Button>
       </div>
     </Form>
   );
-}
+};
 
 export default EmployeeForm;
