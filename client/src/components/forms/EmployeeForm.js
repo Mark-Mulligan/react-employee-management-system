@@ -27,12 +27,12 @@ const EmployeeForm = (props) => {
     axios.get(`/api/employees/${id}`).then(
       (response) => {
         if (response.status === 200) {
-          const employeeData = response.data[0];
+          const employeeData = response.data.data[0];
           setFirstName(employeeData.first_name);
           setLastName(employeeData.last_name);
-          setDepartmentId(employeeData.departmentId);
+          setDepartmentId(employeeData.department_id);
           setRoleId(employeeData.role_id);
-          setManagerId(employeeData.manager_id);
+          setManagerId(convertNoMangerFromDb(employeeData.manager_id));
           setDateHired(employeeData.date_hired);
 
           getManagerValues();
@@ -45,7 +45,11 @@ const EmployeeForm = (props) => {
     );
   };
 
-  const convertManagerId = (managerId) => {
+  const convertNoMangerFromDb = (managerId) => {
+    return (!managerId) ? 0 : managerId;
+  }
+
+  const formateManagerIdForPost = (managerId) => {
     return managerId === 0 ? null : managerId;
   };
 
@@ -77,7 +81,7 @@ const EmployeeForm = (props) => {
   };
 
   const handleDeleteClick = () => {
-    axios.delete(`/api/employee/${props.employeeId}`).then(
+    axios.delete(`/api/employees/${props.employeeId}`).then(
       (response) => {
         if (response.status === 200) {
           props.history.push("/employees");
@@ -133,7 +137,7 @@ const EmployeeForm = (props) => {
           lastName,
           dateHired: formatDate(dateHired),
           roleId,
-          managerId: convertManagerId(managerId),
+          managerId: formateManagerIdForPost(managerId),
         })
       }
     >

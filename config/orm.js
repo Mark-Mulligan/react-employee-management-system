@@ -237,7 +237,7 @@ const orm = {
       employeeId,
       userId,
     } = employeeObj;
-    const queryString = `UPDATE roles SET first_name = ?, last_name = ?, role_id = ?, manager_id = ?, date_hired = ? 
+    const queryString = `UPDATE employees SET first_name = ?, last_name = ?, role_id = ?, manager_id = ?, date_hired = ? 
     WHERE id = ? AND user_id = ?;`;
     connection.query(
       queryString,

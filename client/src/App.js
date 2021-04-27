@@ -21,6 +21,7 @@ import RolesPage from "./pages/RolesPage";
 import RolePage from "./pages/RolePage";
 import CreateRolePage from "./pages/CreateRolePage";
 import EditRolePage from "./pages/EditRolePage";
+import EditEmployeePage from "./pages/EditEmployeePage";
 
 import "./App.css";
 
@@ -97,6 +98,13 @@ function App() {
             userLoggedIn={userLoggedIn}
             setUserLoggedIn={setUserLoggedIn}
             component={EmployeePage}
+          />
+          <PrivateRoute
+            exact
+            path="/employee/:id/edit"
+            userLoggedIn={userLoggedIn}
+            setUserLoggedIn={setUserLoggedIn}
+            component={EditEmployeePage}
           />
           <PrivateRoute
             exact

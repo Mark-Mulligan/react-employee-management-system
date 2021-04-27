@@ -38,6 +38,7 @@ const EditEmployeePage = (props) => {
         <ErrorModal modalMessage={errorMessage} />
       ) : (
         <EmployeeForm
+          userLoggedIn={props.userLoggedIn}
           employeeId={employeeId}
           handleFormSubmit={handleEditFormSubmit}
           history={props.history}
