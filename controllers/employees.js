@@ -76,6 +76,21 @@ exports.getEmployees = (req, res) => {
   }
 };
 
+exports.employeeBarChartData = (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+
+    Employee.getBarChartData(userId, (err) => {
+      console.log(err);
+      res.status(500).json({ success: false, err: err });
+    },
+    (result) => {
+      console.log(result);
+      res.status(200).json({ success: true, data: result });
+    })
+  }
+}
+
 exports.getSingleEmployeeInfo = (req, res) => {
   if (req.isAuthenticated()) {
     const { employeeId } = req.params;

@@ -78,6 +78,21 @@ exports.getRoles = (req, res) => {
   }
 };
 
+exports.roleBarChartData = (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+
+    Role.getBarChartData(userId, (err) => {
+      console.log(err);
+      res.status(500).json({ success: false, err: err });
+    },
+    (result) => {
+      console.log(result);
+      res.status(200).json({ success: true, data: result });
+    })
+  }
+}
+
 exports.getSingleRoleInfo = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;

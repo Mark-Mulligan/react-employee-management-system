@@ -3,9 +3,10 @@ const router = express.Router();
 
 // Controllers
 const {
-  getRoles, getSingleRoleInfo, createRole, deleteRole, updateRole
+  getRoles, getSingleRoleInfo, createRole, deleteRole, updateRole, roleBarChartData
 } = require("../controllers/roles");
 
+router.route("/data/chartdata").get(roleBarChartData);
 router.route("/:roleId").get(getSingleRoleInfo);
 router.route("/:roleId").delete(deleteRole);
 router.route("/:roleId").put(updateRole);

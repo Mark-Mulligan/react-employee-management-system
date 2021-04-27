@@ -51,6 +51,16 @@ const Employee = {
     );
   },
 
+  getBarChartData: function (userId, errCb, cb) {
+    orm.getEmployeeBarChartData(
+      userId,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   /* Need to fix this in orm */
   getSingleEmployee: function (employeeId, errCb, cb) {
     orm.getSingleEmployee(

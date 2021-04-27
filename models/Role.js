@@ -49,6 +49,16 @@ const Role = {
     );
   },
 
+  getBarChartData: function (userId, errCb, cb) {
+    orm.getRoleBarChartData(
+      userId,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   getSingleRole: function (userId, roleId, errCb, cb) {
     orm.getSingleRole(
       userId,

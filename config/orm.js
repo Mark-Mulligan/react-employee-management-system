@@ -301,7 +301,7 @@ const orm = {
   },
 
   /* Data analytics section */
-  getRoleBarChartData: (userId, errCb, cb) => {
+  getRoleBarChartData: function (userId, errCb, cb) {
     const queryString = `SELECT roles.salary, roles.title from roles WHERE user_id = ? order by roles.salary`;
 
     connection.query(queryString, [userId], (err, result) => {
@@ -311,6 +311,21 @@ const orm = {
         return cb(result);
       }
     });
+  },
+
+  getEmployeeBarChartData: function (userId, errCb, cb) {
+    const queryString = `SELECT COUNT(employees.id) as employees_hired, YEAR(employees.date_hired) as year
+    FROM employees WHERE user_id = 19 
+    GROUP BY YEAR(employees.date_hired)
+    ORDER BY year;`;
+
+    connection.query(queryString, [userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    })
   }
 
 };
