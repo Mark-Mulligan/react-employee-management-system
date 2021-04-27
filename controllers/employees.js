@@ -49,7 +49,7 @@ exports.getEmployees = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
 
-    if (JSON.stringify(req.params) === "{}") {
+    if (JSON.stringify(req.query) === "{}") {
       console.log("employee table data ran");
       Employee.getTableData(
         userId,

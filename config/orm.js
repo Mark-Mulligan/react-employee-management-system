@@ -271,7 +271,7 @@ const orm = {
 
   getPossibleManagers: function (userId, errCb, cb) {
     const queryString = `Select CONCAT(first_name, ' ', last_name) as manager, id 
-    from employees where user_id = ? and manager_id != null;`;
+    from employees where user_id = ?;`;
 
     connection.query(queryString, [userId], (err, result) => {
       if (err) {

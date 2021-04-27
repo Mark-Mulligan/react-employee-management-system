@@ -35,6 +35,7 @@ const CreateEmployeePage = (props) => {
         <ErrorModal modalMessage={errorMessage} />
       ) : (
         <EmployeeForm
+          userLoggedIn={props.userLoggedIn}
           handleFormSubmit={handleCreateFormSubmit}
           history={props.history}
         />

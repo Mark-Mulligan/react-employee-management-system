@@ -49,11 +49,15 @@ const EmployeeForm = (props) => {
   }
 
   const getDepartmentValues = async () => {
-    const { data } = await axios.get(
-      "/api/departments"
-    );
-    console.log(data);
-    setDepartmentValues( data.data );
+    try {
+      const { data } = await axios.get(
+        "/api/departments"
+      );
+      setDepartmentValues( data.data );
+    } catch(error) {
+      console.log(error);
+    }
+    
   };
 
   //Need to fix route
@@ -61,10 +65,6 @@ const EmployeeForm = (props) => {
     const { data } = await axios.get(
       `/api/roles?departmentid=${departmentId}`
     );
-
-    console.log(departmentId);
-    console.log(data.data);
-
     setRoleValues(data.data);
   };
 
@@ -98,14 +98,16 @@ const EmployeeForm = (props) => {
   };
 
   useEffect(() => {
-    if (props.employeeId) {
-      getEmployeeInfo(props.employeeId);
-      getDepartmentValues();
-    } else {
-      getDepartmentValues();
-      getManagerValues();
+    if (props.userLoggedIn) {
+      if (props.employeeId) {
+        getEmployeeInfo(props.employeeId);
+        getDepartmentValues();
+      } else {
+        getDepartmentValues();
+        getManagerValues();
+      }
     }
-  }, [props.employeeId]);
+  }, [props.userLoggedIn]);
 
   const renderRolePlacholder = () => {
     return departmentId ? "Choose" : "Must select department";
@@ -205,7 +207,7 @@ const EmployeeForm = (props) => {
         </Col>
 
         <Col sm={12} md={4} className="mb-4">
-          {managerValues.length > 0 && departmentId && (
+          {departmentId && (
             <FormControl required variant="outlined" fullWidth={true}>
               <InputLabel id="managerSelectLabel">Manager</InputLabel>
               <Select
