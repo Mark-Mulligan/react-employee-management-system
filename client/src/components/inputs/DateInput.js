@@ -16,7 +16,6 @@ const DateInput = (props) => {
   return (
       <KeyboardDatePicker
         inputVariant="outlined"
-        size="small"
         className={classes.dateInput}
         fullWidth
         disableToolbar
@@ -24,7 +23,7 @@ const DateInput = (props) => {
         format="MM/dd/yyyy"
         margin="normal"
         id={props.id}
-        label="Lesson Date"
+        label="Date Hired"
         value={props.value}
         onChange={props.onDateChange}
         KeyboardButtonProps={{

@@ -23,6 +23,10 @@ const EmployeeForm = (props) => {
   const [roleValues, setRoleValues] = useState([]);
   const [managerValues, setManagerValues] = useState([]);
 
+  useEffect(() => {
+    console.log(dateHired.toLocaleDateString());
+  }, [dateHired]);
+
   const getEmployeeInfo = (id) => {
     axios.get(`/api/employees/${id}`).then(
       (response) => {
@@ -120,11 +124,18 @@ const EmployeeForm = (props) => {
   return (
     <Form
       onSubmit={(event) =>
-        props.handleFormSubmit(event, firstName, lastName, roleId, managerId)
+        props.handleFormSubmit(event, {
+          firstName,
+          lastName,
+          dateHired: dateHired,
+          departmentId,
+          roleId,
+          managerId: convertManagerId(managerId),
+        })
       }
     >
       <Row>
-        <Col className="mb-4" xs={12} sm={6}>
+        <Col className="mb-4" xs={12} sm={6} md={4}>
           <FormControl fullWidth={true}>
             <TextField
               id="firstNameInput"
@@ -136,7 +147,7 @@ const EmployeeForm = (props) => {
             />
           </FormControl>
         </Col>
-        <Col className="mb-4" xs={12} sm={6}>
+        <Col className="mb-4" xs={12} sm={6} md={4}>
           <FormControl fullWidth={true}>
             <TextField
               id="lastNameInput"
@@ -148,7 +159,7 @@ const EmployeeForm = (props) => {
             />
           </FormControl>
         </Col>
-        <Col className="mb-4" sm={12}>
+        <Col className="mb-4" sm={12} md={4}>
           <FormControl fullWidth>
             <DateInput
               id="date-input"
