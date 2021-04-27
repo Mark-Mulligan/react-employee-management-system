@@ -2,9 +2,10 @@ import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom';
+import LogoutButton from "../buttons/LogoutButton";
 import './BootstrapNavbar.css';
 
-const BoostrapNavbar = () => {
+const BoostrapNavbar = ({ history, setUserLoggedIn}) => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
         
@@ -25,6 +26,7 @@ const BoostrapNavbar = () => {
                 <NavDropdown.Item as={Link} to="/roles" className="custom-link">View All</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/roles/new" className="custom-link">Add Role</NavDropdown.Item>
             </NavDropdown>
+            <LogoutButton history={history} setUserLoggedIn={setUserLoggedIn} />
           </Nav>
         </Navbar.Collapse>
       </Navbar>

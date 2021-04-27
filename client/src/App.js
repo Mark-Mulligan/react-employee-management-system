@@ -9,7 +9,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import PrivateRoute from "./routing/PrivateRoute";
 import LandingPage from "./pages/LandingPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
-import BoostrapNavbar from "./components/navigation/BootstrapNavbar";
+import BootstrapNavbar from "./components/navigation/BootstrapNavbar";
 import AllEmployeesPage from "./pages/AllEmployeesPage";
 import EmployeePage from "./pages/EmployeePage";
 import CreateEmployeePage from "./pages/CreateEmployeePage";
@@ -68,7 +68,9 @@ function App() {
               )}
             />
 
-            <Route component={BoostrapNavbar} />
+            <Route render={(props) => {
+              <BootstrapNavbar {...props} setUserLoggedIn={setUserLoggedIn} />
+            }} />
           </Switch>
 
           <PrivateRoute
