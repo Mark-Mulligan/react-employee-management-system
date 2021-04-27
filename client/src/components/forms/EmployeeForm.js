@@ -23,7 +23,7 @@ const EmployeeForm = (props) => {
   const [managerValues, setManagerValues] = useState([]);
 
   const getEmployeeInfo = (id) => {
-    axios.get(`/employee/${id}`).then(
+    axios.get(`/api/employees/${id}`).then(
       (response) => {
         if (response.status === 200) {
           const employeeData = response.data[0];
@@ -65,11 +65,8 @@ const EmployeeForm = (props) => {
   };
 
   const getManagerValues = async () => {
-    const excludeEmployee = props.employeeId
-      ? `?excludeid=${props.employeeId}`
-      : "";
     const { data } = await axios.get(
-      `/employees/name-id${excludeEmployee}`
+      `/api/employees`
     );
     setManagerValues(data.data);
   };

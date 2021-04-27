@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import EmployeeForm from "../components/EmployeeForm";
-import ErrorModal from "../components/ErrorModal";
+import EmployeeForm from "../components/forms/EmployeeForm";
+import ErrorModal from "../components/modals/ErrorModal";
 
 const CreateEmployeePage = (props) => {
   const [errorMessage, setErrorMessage] = useState("");

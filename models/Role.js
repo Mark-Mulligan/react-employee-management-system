@@ -31,6 +31,14 @@ const Role = {
     );
   },
 
+  getRolesInDepartment: function (userId, departmentId, errCb, cb) {
+    orm.getRolesInDepartment(userId, departmentId, errCb, cb),
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      };
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getRoleTableData(
       userId,

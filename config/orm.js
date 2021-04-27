@@ -159,9 +159,22 @@ const orm = {
     );
   },
 
+  getRolesInDepartment: function (userId, departmentId, errCb, cb) {
+    const queryString = `Select roles.id, title, salary, departments.name as department from roles 
+    join departments where roles.department_id = departments.id AND roles.user_id = ? AND departments.id = ?;`;
+
+    connection.query(queryString, [userId, departmentId, errCb, cb], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    })
+  },
+
   getRoleTableData: function (userId, errCb, cb) {
     const queryString = `Select roles.id, title, salary, departments.name as department from roles 
-        join departments where roles.department_id = departments.id AND roles.user_id = ?`;
+        join departments where roles.department_id = departments.id AND roles.user_id = ?;`;
 
     connection.query(queryString, [userId], (err, result) => {
       if (err) {

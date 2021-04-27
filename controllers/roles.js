@@ -11,20 +11,20 @@ exports.createRole = (req, res) => {
       (result) => res.status(201).json({ success: true, data: result })
     );
   }
-}
+};
 
 exports.deleteRole = (req, res) => {
   if (req.isAuthenticated()) {
     const { roleId } = req.params;
     const userId = req.user.id;
-  
+
     Role.delete(
       { table: "roles", targetId: roleId, userId },
       (err) => res.status(500).json({ success: false, err: err }),
       (result) => res.status(200).json({ success: true, data: result })
     );
   }
-}
+};
 
 exports.updateRole = (req, res) => {
   if (req.isAuthenticated()) {
@@ -32,42 +32,67 @@ exports.updateRole = (req, res) => {
     const { roleId } = req.params;
     const { title, salary, departmentId } = req.body;
 
-    Role.update({ title, salary, departmentId, roleId, userId }, (err) => {
-      console.log(err);
-      res.status(500).json({ success: false, err: err });
-    }, (result) => {
-      res.status(200).json({ success: true, data: result });
-    })
-  }
-};
-
-exports.getRoleTableData = (req, res) => {
-  if (req.isAuthenticated()) {
-    const userId = req.user.id;
-
-    Role.getTableData(userId,
+    Role.update(
+      { title, salary, departmentId, roleId, userId },
       (err) => {
         console.log(err);
         res.status(500).json({ success: false, err: err });
       },
       (result) => {
         res.status(200).json({ success: true, data: result });
-      })
+      }
+    );
   }
-}
+};
+
+exports.getRoles = (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+
+    if (JSON.stringify(req.params) === '{}') {
+      Role.getTableData(
+        userId,
+        (err) => {
+          console.log(err);
+          res.status(500).json({ success: false, err: err });
+        },
+        (result) => {
+          res.status(200).json({ success: true, data: result });
+        }
+      );
+    } else {
+      const departmentId = req.params.departmentid;
+      Role.getRolesInDepartment(
+        userId,
+        departmentId,
+        (err) => {
+          console.log(err);
+          res.status(500).json({ success: false, err: err });
+        },
+        (result) => {
+          res.status(200).json({ success: true, data: result });
+        }
+      );
+    }
+  }
+};
 
 exports.getSingleRoleInfo = (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
     const { roleId } = req.params;
 
-    Role.getSingleRole(userId, roleId, (err) => {
-      console.log(err);
-      res.status(500).json({ success: false, err: err });
-    },
-    (result) => {
-      console.log(result);
-      res.status(200).json({ success: true, data: result });
-    })
+    Role.getSingleRole(
+      userId,
+      roleId,
+      (err) => {
+        console.log(err);
+        res.status(500).json({ success: false, err: err });
+      },
+      (result) => {
+        console.log(result);
+        res.status(200).json({ success: true, data: result });
+      }
+    );
   }
-}
+};
