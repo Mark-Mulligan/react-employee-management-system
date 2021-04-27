@@ -47,9 +47,10 @@ exports.updateRole = (req, res) => {
 
 exports.getRoles = (req, res) => {
   if (req.isAuthenticated()) {
+    console.log('roles route hit');
     const userId = req.user.id;
 
-    if (JSON.stringify(req.params) === '{}') {
+    if (JSON.stringify(req.query) === '{}') {
       Role.getTableData(
         userId,
         (err) => {
@@ -61,7 +62,7 @@ exports.getRoles = (req, res) => {
         }
       );
     } else {
-      const departmentId = req.params.departmentid;
+      const departmentId = req.query.departmentid;
       Role.getRolesInDepartment(
         userId,
         departmentId,

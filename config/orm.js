@@ -269,6 +269,19 @@ const orm = {
     });
   },
 
+  getPossibleManagers: function (userId, errCb, cb) {
+    const queryString = `Select CONCAT(first_name, ' ', last_name) as manager, id 
+    from employees where user_id = ? and manager_id != null;`;
+
+    connection.query(queryString, [userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
+  },
+
   getEmployeeTableData: function (userId, errCb, cb) {
     const queryString = `Select a.id, a.first_name, a.last_name, roles.title, 
     departments.name as department, roles.salary, CONCAT(b.first_name, ' ', b.last_name) as manager, a.date_hired

@@ -31,6 +31,16 @@ const Employee = {
     );
   },
 
+  getManagers: function (userId, errCb, cb) {
+    orm.getPossibleManagers(
+      userId,
+      (err) => errCb(err),
+      (result) => {
+        cb(result);
+      }
+    );
+  },
+
   getTableData: function (userId, errCb, cb) {
     orm.getEmployeeTableData(
       userId,

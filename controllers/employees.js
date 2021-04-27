@@ -32,22 +32,8 @@ exports.updateEmployee = (req, res) => {
     const { employeeId } = req.params;
     const { firstName, lastName, roleId, managerId, dateHired } = req.body;
 
-    Employee.update({ firstName, lastName, roleId, managerId, dateHired, userId, employeeId }, (err) => {
-      console.log(err);
-      res.status(500).json({ success: false, err: err });
-    },
-    (result) => {
-      res.status(200).json({ success: true, data: result });
-    })
-  }
-};
-
-exports.getEmployeeTableData = (req, res) => {
-  if (req.isAuthenticated()) {
-    const userId = req.user.id;
-
-    Employee.getTableData(
-      userId,
+    Employee.update(
+      { firstName, lastName, roleId, managerId, dateHired, userId, employeeId },
       (err) => {
         console.log(err);
         res.status(500).json({ success: false, err: err });
@@ -59,17 +45,51 @@ exports.getEmployeeTableData = (req, res) => {
   }
 };
 
+exports.getEmployees = (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+
+    if (JSON.stringify(req.params) === "{}") {
+      console.log("employee table data ran");
+      Employee.getTableData(
+        userId,
+        (err) => {
+          console.log(err);
+          res.status(500).json({ success: false, err: err });
+        },
+        (result) => {
+          res.status(200).json({ success: true, data: result });
+        }
+      );
+    } else {
+      Employee.getManagers(
+        userId,
+        (err) => {
+          console.log(err);
+          res.status(500).json({ success: false, err: err });
+        },
+        (result) => {
+          res.status(200).json({ success: true, data: result });
+        }
+      );
+    }
+  }
+};
+
 exports.getSingleEmployeeInfo = (req, res) => {
   if (req.isAuthenticated()) {
     const { employeeId } = req.params;
 
-    Employee.getSingleEmployee(employeeId, (err) => {
-      console.log(err);
-      res.status(500).json({ success: false, err: err });
-    },
-    (result) => {
-      console.log(result);
-      res.status(200).json({ success: true, data: result });
-    })
+    Employee.getSingleEmployee(
+      employeeId,
+      (err) => {
+        console.log(err);
+        res.status(500).json({ success: false, err: err });
+      },
+      (result) => {
+        console.log(result);
+        res.status(200).json({ success: true, data: result });
+      }
+    );
   }
 };

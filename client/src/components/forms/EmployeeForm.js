@@ -59,14 +59,18 @@ const EmployeeForm = (props) => {
   //Need to fix route
   const getRolesValues = async (departmentId) => {
     const { data } = await axios.get(
-      `/api/departments/${departmentId}/roles`
+      `/api/roles?departmentid=${departmentId}`
     );
+
+    console.log(departmentId);
+    console.log(data.data);
+
     setRoleValues(data.data);
   };
 
   const getManagerValues = async () => {
     const { data } = await axios.get(
-      `/api/employees`
+      `/api/employees?managers=true`
     );
     setManagerValues(data.data);
   };
