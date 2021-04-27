@@ -6,18 +6,21 @@ import ErrorModal from "../components/modals/ErrorModal";
 const CreateEmployeePage = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleCreateFormSubmit = (event, firstName, lastName, roleId, managerId) => {
+  const handleCreateFormSubmit = (event, employeeObj) => {
+    const {firstName, lastName, dateHired, roleId, managerId} = employeeObj;
+
     event.preventDefault();
     axios
-      .post("/employees", {
+      .post("/api/employees", {
         firstName,
         lastName,
+        dateHired,
         roleId,
         managerId,
       })
       .then(
         (response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             props.history.push("/employees");
           }
         },

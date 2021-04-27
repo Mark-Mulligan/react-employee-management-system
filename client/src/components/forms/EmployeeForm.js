@@ -23,10 +23,6 @@ const EmployeeForm = (props) => {
   const [roleValues, setRoleValues] = useState([]);
   const [managerValues, setManagerValues] = useState([]);
 
-  useEffect(() => {
-    console.log(dateHired.toLocaleDateString());
-  }, [dateHired]);
-
   const getEmployeeInfo = (id) => {
     axios.get(`/api/employees/${id}`).then(
       (response) => {
@@ -50,7 +46,7 @@ const EmployeeForm = (props) => {
   };
 
   const convertManagerId = (managerId) => {
-    return !managerId ? "0" : managerId;
+    return managerId === 0 ? null : managerId;
   };
 
   const getDepartmentValues = async () => {
@@ -109,6 +105,14 @@ const EmployeeForm = (props) => {
     return departmentId ? "Choose" : "Must select department";
   };
 
+  const formatDate = (date) => {
+    let tempDate = date.toLocaleDateString().split("/");
+    const year = tempDate[2];
+    const month = tempDate[0];
+    const day = tempDate[1];
+    return `${year}-${month}-${day}`;
+  }
+
   const renderMenuItems = (dataArr, key1, key2) => {
     if (dataArr.length > 0) {
       return dataArr.map((data) => {
@@ -127,8 +131,7 @@ const EmployeeForm = (props) => {
         props.handleFormSubmit(event, {
           firstName,
           lastName,
-          dateHired: dateHired,
-          departmentId,
+          dateHired: formatDate(dateHired),
           roleId,
           managerId: convertManagerId(managerId),
         })
