@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import axios from "axios";
 import { ThemeProvider } from "@material-ui/styles";
 import { createMuiTheme } from "@material-ui/core";
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import PrivateRoute from "./routing/PrivateRoute";
@@ -68,9 +68,11 @@ function App() {
               )}
             />
 
-            <Route render={(props) => {
-              <BootstrapNavbar {...props} setUserLoggedIn={setUserLoggedIn} />
-            }} />
+            <Route
+              render={(props) => (
+                <BootstrapNavbar {...props} setUserLoggedIn={setUserLoggedIn} />
+              )}
+            />
           </Switch>
 
           <PrivateRoute
