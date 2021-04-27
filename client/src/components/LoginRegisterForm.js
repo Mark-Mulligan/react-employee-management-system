@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
+import { Button } from "react-bootstrap";
 import PasswordInput from "../components/inputs/PasswordInput";
 
 const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
@@ -93,18 +94,20 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
     <div className="container-fluid max-width-600 mt-4">
       {!loginForm && !registerForm ? (
         <div>
-          <button
-            className="btn btn-dark mr-4"
+          <Button
+            className="mr-4"
+            variant="light"
             onClick={() => setLoginForm(true)}
           >
             Login
-          </button>
-          <button
-            className="btn btn-outline-dark"
+          </Button>
+          <Button
+            className="mr-4"
+            variant="outline-light"
             onClick={() => setRegisterForm(true)}
           >
-            Register
-          </button>
+            Create Account
+          </Button>
         </div>
       ) : null}
 
@@ -114,16 +117,12 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
             {renderFormInputs()}
             {registerForm && renderConfirmPassword()}
             <div>
-              <button type="submit" className="btn btn-dark mr-4">
+              <Button className="mr-4" variant="light" type="submit">
                 {loginForm ? "Login" : "Create Account"}
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-dark"
-                onClick={handleCancel}
-              >
+              </Button>
+              <Button onClick={handleCancel} variant="outline-light">
                 Cancel
-              </button>
+              </Button>
             </div>
           </form>
         </div>

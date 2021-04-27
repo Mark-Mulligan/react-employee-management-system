@@ -298,6 +298,19 @@ const orm = {
         return cb(result);
       }
     });
+  },
+
+  /* Data analytics section */
+  getRoleBarChartData: (userId, errCb, cb) => {
+    const queryString = `SELECT roles.salary, roles.title from roles WHERE user_id = ? order by roles.salary`;
+
+    connection.query(queryString, [userId], (err, result) => {
+      if (err) {
+        return errCb(err);
+      } else {
+        return cb(result);
+      }
+    });
   }
 
 };
