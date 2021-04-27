@@ -68,7 +68,7 @@ const AnalyticsPage = (props) => {
 
   const getEmployeeData = () => {
     axios
-      .get("/api/employees/chartdata")
+      .get("/api/employees/data/chartdata")
       .then((response) => {
         setEmployeeData(response.data.data);
       })
