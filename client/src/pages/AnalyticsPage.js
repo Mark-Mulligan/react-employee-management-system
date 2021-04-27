@@ -7,14 +7,19 @@ import axios from "axios";
 import util from "../util/util";
 
 // GLOBAL VARIABLES FOR REACT-CHARTJS-2
-defaults.global.defaultFontColor = "rgba(220,220,215,255)";
-defaults.global.elements.line.borderColor = "rgba(220,220,215,255)";
+defaults.defaultFontColor = "rgba(220,220,215,255)";
+defaults.elements.line.borderColor = "rgba(220,220,215,255)";
 
 const AnalyticsPage = (props) => {
+
+  
+
   const [departments, setDepartments] = useState([]);
   const [roleData, setRoleData] = useState([]);
   const [employeeData, setEmployeeData] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+
+  console.log("defaults", defaults.defaultFontColor);
 
   useEffect(() => {
     if (props.userLoggedIn) {
