@@ -33,7 +33,7 @@ const EmployeeForm = (props) => {
           setDepartmentId(employeeData.department_id);
           setRoleId(employeeData.role_id);
           setManagerId(convertNoMangerFromDb(employeeData.manager_id));
-          setDateHired(employeeData.date_hired);
+          setDateHired(new Date(employeeData.date_hired));
 
           getManagerValues();
           getRolesValues(employeeData.department_id);
@@ -130,9 +130,10 @@ const EmployeeForm = (props) => {
   };
 
   return (
-    <Form
-      onSubmit={(event) =>
-        props.handleFormSubmit(event, {
+   
+    <form 
+      onSubmit={(e) =>
+        props.handleFormSubmit(e, {
           firstName,
           lastName,
           dateHired: formatDate(dateHired),
@@ -247,6 +248,7 @@ const EmployeeForm = (props) => {
         ) : null}
         <Button
           className="mb-3"
+          type="button"
           as={Link}
           to={"/employees"}
           variant="outline-light"
@@ -254,7 +256,7 @@ const EmployeeForm = (props) => {
           Cancel
         </Button>
       </div>
-    </Form>
+    </form>
   );
 };
 

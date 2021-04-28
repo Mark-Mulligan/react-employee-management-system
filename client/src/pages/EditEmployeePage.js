@@ -8,8 +8,10 @@ const EditEmployeePage = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleEditFormSubmit = (event, employeeObj) => {
-    const { firstName, lastName, dateHired, roleId, managerId } = employeeObj;
     event.preventDefault();
+    console.log(event);
+    console.log('edit form function hit');
+    const { firstName, lastName, dateHired, roleId, managerId } = employeeObj;
     axios
       .put(`/api/employees/${employeeId}`, {
         firstName,
@@ -28,8 +30,8 @@ const EditEmployeePage = (props) => {
           console.log(error);
           setErrorMessage("There was an error updating the employee.");
         }
-      );
-  };
+      );  
+  };  
 
   return (
     <div className="container mt-5">
@@ -45,7 +47,7 @@ const EditEmployeePage = (props) => {
         />
       )}
     </div>
-  );
+  ); 
 };
 
 export default EditEmployeePage;

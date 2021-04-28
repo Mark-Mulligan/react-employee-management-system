@@ -253,7 +253,7 @@ const orm = {
   },
 
   getSingleEmployee: function (id, errCb, cb) {
-    const queryString = `Select a.id, a.first_name, a.last_name, roles.title, roles.id as role_id, departments.id as department_id, 
+    const queryString = `Select a.id, a.first_name, a.last_name, a.date_hired, roles.title, roles.id as role_id, departments.id as department_id, 
         departments.name as department, roles.salary, a.manager_id, CONCAT(b.first_name, ' ', b.last_name) as manager
         FROM employees a join roles on a.role_id = roles.id 
         join departments on roles.department_id = departments.id

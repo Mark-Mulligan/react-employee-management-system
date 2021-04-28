@@ -12,7 +12,7 @@ CREATE TABLE users (
 
 CREATE TABLE departments (
     id INT NOT NULL AUTO_INCREMENT PRIMARY Key,
-    name VARCHAR(30),
+    name VARCHAR(255),
     user_id INT NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
@@ -21,7 +21,7 @@ CREATE TABLE departments (
 
 CREATE TABLE roles (
   id INT NOT NULL AUTO_INCREMENT PRIMARY Key,
-  title VARCHAR(30),
+  title VARCHAR(255),
   salary DECIMAL,
   department_id INT,
   user_id INT NOT NULL,
@@ -33,8 +33,8 @@ CREATE TABLE roles (
 
 CREATE TABLE employees (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY Key,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
     role_id INT,
     manager_id INT,
     date_hired DATE,
