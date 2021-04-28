@@ -38,7 +38,11 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
           username,
           password,
         });
-        console.log(response);
+        if (response.status === 201) {
+          setRegisterForm(false);
+          setLoginForm(true);
+          alert("Account created, please log in");
+        }
       } catch (err) {
         console.log(err.response);
         alert(err.response.data.message);

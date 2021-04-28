@@ -106,7 +106,7 @@ const orm = {
     const queryString = `SELECT departments.id, departments.name, 
     count(employees.id) as employees, 
     count(distinct roles.id) as roles, 
-    SUM(roles.salary) as departmentUtilization       
+    SUM(CASE WHEN employees.id != 'null' THEN roles.salary ELSE 0 END) as departmentUtilization       
     from departments
     left join roles
     on (roles.department_id = departments.id)

@@ -8,9 +8,11 @@ module.exports = function (passport) {
       console.log(username, password);
 
       User.findOne(username, (user) => {
-        if (!user) {
+        if (user == false) {
+          console.log('no user ran');
           return done(null, false, { message: "Incorrect username. " });
         }
+
         bcrypt.compare(password, user[0].password, (err, result) => {
           if (err) return done(err);
           if (result) done(null, user);
