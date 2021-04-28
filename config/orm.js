@@ -315,7 +315,7 @@ const orm = {
 
   getEmployeeBarChartData: function (userId, errCb, cb) {
     const queryString = `SELECT COUNT(employees.id) as employees_hired, YEAR(employees.date_hired) as year
-    FROM employees WHERE user_id = 19 
+    FROM employees WHERE user_id = ? 
     GROUP BY YEAR(employees.date_hired)
     ORDER BY year;`;
 
