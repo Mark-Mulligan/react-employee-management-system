@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
-import LoginRegisterForm from '../components/LoginRegisterForm';
+import React, { useEffect } from "react";
+import LoginRegisterForm from "../components/LoginRegisterForm";
+import "./LandingPage.css";
 
 const LandingPage = ({ history, userLoggedIn, setUserLoggedIn }) => {
-
   useEffect(() => {
     if (userLoggedIn) {
-      history.push('/dashboard');
+      history.push("/dashboard");
     }
-  }, [userLoggedIn, history])
+  }, [userLoggedIn, history]);
 
   return (
-    <div className="container mt-4 text-center">
+    <div className="landing-page-container max-width-600 container text-center">
       <h1>Employee Management System</h1>
+      <hr />
       <LoginRegisterForm history={history} setUserLoggedIn={setUserLoggedIn} />
     </div>
-  )
-}
+  );
+};
 
 export default LandingPage;

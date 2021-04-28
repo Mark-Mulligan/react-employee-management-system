@@ -95,23 +95,31 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
   };
 
   return (
-    <div className="container-fluid max-width-600 mt-4">
+    <div className="container-fluid mt-4">
       {!loginForm && !registerForm ? (
         <div>
-          <Button
-            className="mr-4"
-            variant="light"
-            onClick={() => setLoginForm(true)}
-          >
-            Login
-          </Button>
-          <Button
-            className="mr-4"
-            variant="outline-light"
-            onClick={() => setRegisterForm(true)}
-          >
-            Create Account
-          </Button>
+          <p className="">
+            Easily manage a database of departments, roles and employees within
+            your company. View graphs with insightful infomration. Access tables
+            of data. Effortlessly add, update or delete any infomation. Choose
+            an option below to begin.{" "}
+          </p>
+          <div class="row">
+            <div class="col-sm-6 col-12 mb-3">
+              <Button variant="light" onClick={() => setLoginForm(true)} block>
+                Login
+              </Button>
+            </div>
+            <div class="col-sm-6 col-12 mb-3">
+              <Button
+                variant="outline-light"
+                onClick={() => setRegisterForm(true)}
+                block
+              >
+                Create Account
+              </Button>
+            </div>
+          </div>
         </div>
       ) : null}
 
@@ -120,13 +128,17 @@ const LoginRegisterForm = ({ history, setUserLoggedIn }) => {
           <form onSubmit={handleLoginRegistration}>
             {renderFormInputs()}
             {registerForm && renderConfirmPassword()}
-            <div>
-              <Button className="mr-4" variant="light" type="submit">
-                {loginForm ? "Login" : "Create Account"}
-              </Button>
-              <Button onClick={handleCancel} variant="outline-light">
-                Cancel
-              </Button>
+            <div class="row">
+              <div class="col-sm-6 col-12 mb-3">
+                <Button className="mr-4" variant="light" type="submit" block>
+                  {loginForm ? "Login" : "Create Account"}
+                </Button>
+              </div>
+              <div class="col-sm-6 col-12 mb-3">
+                <Button onClick={handleCancel} variant="outline-light" block>
+                  Cancel
+                </Button>
+              </div>
             </div>
           </form>
         </div>
