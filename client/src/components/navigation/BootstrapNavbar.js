@@ -9,7 +9,7 @@ const BoostrapNavbar = ({ history, setUserLoggedIn}) => {
   return (
     <Navbar bg="dark" variant="dark" expand="sm">
         
-        <LinkContainer to="/"><Navbar.Brand>Company Name</Navbar.Brand></LinkContainer>
+        <LinkContainer to="/"><Navbar.Brand>Company Overview</Navbar.Brand></LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto text-center">

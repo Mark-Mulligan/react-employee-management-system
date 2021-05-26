@@ -22,7 +22,7 @@ const RoleForm = (props) => {
     if (props.roleId) {
       getRoleInfo(props.roleId);
     }
-  }, [props.departmentId]);
+  }, [props.roleId]);
 
   const getDepartmentValues = async () => {
     const { data } = await axios.get(
